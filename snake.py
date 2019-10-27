@@ -12,7 +12,6 @@ screen_cells_height = 40
 screen = pygame.display.set_mode((screen_cells_width*square_size, screen_cells_height*square_size))
 
 # Misc static
-snake_color = (255, 0, 0) # red
 food_color = (128, 128, 128) # gray
 snake = [(1, 1), (2, 1)]
 
@@ -22,6 +21,7 @@ colors = [(255, 0, 0),
           (255, 128, 0),
           (128, 255, 0),
           (0, 128, 255)]
+snake_color = colors[0]
 
 # Position variables
 snake_x = 0
