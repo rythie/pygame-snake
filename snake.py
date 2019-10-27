@@ -97,5 +97,6 @@ while True:
     # Update display
     pygame.display.flip()
 
-    # Set speed
-    clock.tick(6)
+    level = int(len(snake) / 10)
+    fps = 6 + (2*level) # get faster in later levels
+    clock.tick(fps)
