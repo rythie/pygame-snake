@@ -26,6 +26,7 @@ food_x = 5
 food_y = 5
 
 def end_game():
+    print("Score:", len(snake))
     sys.exit(0)
 
 while True:
