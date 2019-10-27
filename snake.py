@@ -49,6 +49,10 @@ while True:
                 snake_y_direction = 1
                 snake_x_direction = 0
 
+            # Quit
+            if event.key == pygame.K_q:
+                end_game()
+
     # Move the snake
     snake_x += snake_x_direction
     snake_y += snake_y_direction
