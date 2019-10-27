@@ -16,6 +16,13 @@ snake_color = (255, 0, 0) # red
 food_color = (128, 128, 128) # gray
 snake = [(1, 1), (2, 1)]
 
+colors = [(255, 0, 0),
+          (0, 255, 0),
+          (0, 0, 255),
+          (255, 128, 0),
+          (128, 255, 0),
+          (0, 128, 255)]
+
 # Position variables
 snake_x = 0
 snake_x_direction = 1
@@ -99,5 +106,6 @@ while True:
     pygame.display.flip()
 
     level = int(len(snake) / 10)
+    snake_color = colors[level % len(colors)] # change snake color with level
     fps = 6 + (2*level) # get faster in later levels
     clock.tick(fps)
