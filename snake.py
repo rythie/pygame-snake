@@ -5,15 +5,19 @@ import random
 clock = pygame.time.Clock()
 
 # Setup screen
-square_size = 12
+square_size = 18
 
 screen_cells_width = 40
 screen_cells_height = 40
 screen = pygame.display.set_mode((screen_cells_width*square_size, screen_cells_height*square_size))
 
 # Misc static
-food_color = (128, 128, 128) # gray
+food_color = (0, 200, 100)
 snake = [(1, 1), (2, 1)]
+
+obstacle = []
+obstacle_color = (255, 255, 255)
+new_obstacle = True
 
 colors = [(255, 0, 0),
           (0, 255, 0),
@@ -29,8 +33,8 @@ snake_x_direction = 1
 snake_y = 0
 snake_y_direction = 0
 
-food_x = 5
-food_y = 5
+food_x = random.randint(0, screen_cells_width-1)
+food_y = random.randint(0, screen_cells_height-1)
 
 def end_game():
     print("Score:", len(snake))
@@ -76,6 +80,8 @@ while True:
         end_game()
     elif (snake_x, snake_y) in snake:
         end_game()
+    elif (snake_x, snake_y) in obstacle:
+        end_game()
 
     # Move snake by adding new location to the end
     snake.append((snake_x, snake_y))
@@ -91,6 +97,9 @@ while True:
             if (food_x, food_y) not in snake:
                 break
 
+        if len(snake) % 10 == 0:
+            new_obstacle = True
+
     else:
         snake.pop(0) # Don't extend, if didn't eat anything
 
@@ -98,6 +107,24 @@ while True:
     screen.fill((0, 0, 0)) # black background
     for s in snake:
         pygame.draw.rect(screen, snake_color, pygame.Rect(s[0]*square_size, s[1]*square_size, square_size, square_size))
+
+    # draw obstacle
+    if new_obstacle:
+        obstacle = []
+        for x in range(0, 10):
+            obstacle_x = random.randint(0, screen_cells_width-1)
+            obstacle_y = random.randint(0, screen_cells_height-1)
+            if (obstacle_x, obstacle_y) in snake:
+                print("obstacle was in snake")
+            elif (obstacle_x, obstacle_y) is (food_x, food_y):
+                print("obstacle was in food")
+            else:
+                obstacle.append((obstacle_x, obstacle_y))
+
+        new_obstacle = False
+
+    for s in obstacle:
+        pygame.draw.rect(screen, obstacle_color, pygame.Rect(s[0]*square_size, s[1]*square_size, square_size, square_size))
 
     # draw food
     pygame.draw.rect(screen, food_color, pygame.Rect(food_x*square_size, food_y*square_size, square_size, square_size))
