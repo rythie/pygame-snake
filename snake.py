@@ -115,9 +115,9 @@ while True:
             obstacle_x = random.randint(0, screen_cells_width-1)
             obstacle_y = random.randint(0, screen_cells_height-1)
             if (obstacle_x, obstacle_y) in snake:
-                print("obstacle was in snake")
+                pass # obstacle was in snake
             elif (obstacle_x, obstacle_y) is (food_x, food_y):
-                print("obstacle was in food")
+                pass # obstacle was in food
             else:
                 obstacle.append((obstacle_x, obstacle_y))
 
