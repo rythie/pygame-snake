@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+pygame.init()
 clock = pygame.time.Clock()
 
 # Setup screen
@@ -10,6 +11,9 @@ square_size = 18
 screen_cells_width = 40
 screen_cells_height = 40
 screen = pygame.display.set_mode((screen_cells_width*square_size, screen_cells_height*square_size))
+
+pause_font = pygame.font.SysFont('Helvetica', 100)
+#pause_font = pygame.font.Font(None, 100)
 
 # Misc static
 food_color = (0, 200, 100)
@@ -40,6 +44,33 @@ def end_game():
     print("Score:", len(snake))
     sys.exit(0)
 
+def pause_game():
+    restart_game = False
+
+    pause_box_width = 430
+    pause_box_height = 120
+    pause_box_x = (screen_cells_width*square_size - pause_box_width)/2
+    pause_box_y = (screen_cells_height*square_size - pause_box_height)/2
+    pygame.draw.rect(screen, (0,0,0), (pause_box_x, pause_box_y, pause_box_width, pause_box_height))
+    pygame.draw.rect(screen, (255,255,255), (pause_box_x, pause_box_y, pause_box_width, pause_box_height), width=2)
+
+    pause_text = pause_font.render("PAUSED", True, (255, 255, 255))
+    screen.blit(pause_text, (pause_box_x+10, pause_box_y+20))
+    pygame.display.flip()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                end_game()
+            elif event.type == pygame.KEYDOWN:
+                # Quit
+                if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+                    end_game()
+                else:
+                    return
+
+        clock.tick(10)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -60,6 +91,10 @@ while True:
             elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                 snake_y_direction = 1
                 snake_x_direction = 0
+
+            # Pause
+            if event.key == pygame.K_p or event.key == pygame.K_SPACE:
+                pause_game()
 
             # Quit
             if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
