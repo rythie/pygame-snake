@@ -82,18 +82,18 @@ while True:
             key = pygame.key.get_pressed()
 
             # change dir (WASD or arrow keys)
-            if event.key in (pygame.K_a, pygame.K_LEFT):
+            if event.key in (pygame.K_a, pygame.K_LEFT) and snake_x_direction != 1:
                 snake_x_direction = -1
                 snake_y_direction = 0
-            elif event.key in (pygame.K_d, pygame.K_RIGHT):
+            elif event.key in (pygame.K_d, pygame.K_RIGHT) and snake_x_direction != -1:
                 snake_x_direction = 1
                 snake_y_direction = 0
-            elif event.key in (pygame.K_w, pygame.K_UP):
+            elif event.key in (pygame.K_w, pygame.K_UP) and snake_y_direction != 1:
+                snake_x_direction = 0
                 snake_y_direction = -1
+            elif event.key in (pygame.K_s, pygame.K_DOWN) and snake_y_direction != -1:
                 snake_x_direction = 0
-            elif event.key in (pygame.K_s, pygame.K_DOWN):
                 snake_y_direction = 1
-                snake_x_direction = 0
 
             # Pause
             if event.key in (pygame.K_p, pygame.K_SPACE):
