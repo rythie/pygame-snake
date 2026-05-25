@@ -49,10 +49,12 @@ food_x = random.randint(0, SCREEN_CELLS_WIDTH-1)
 food_y = random.randint(0, SCREEN_CELLS_HEIGHT-1)
 
 def end_game():
+    """ End game function """
     print("Score:", len(snake))
     sys.exit(0)
 
 def pause_game():
+    """ Pause game screen """
     pygame.draw.rect(screen, (0,0,0), (PAUSE_BOX_X, PAUSE_BOX_Y, PAUSE_BOX_WIDTH, PAUSE_BOX_HEIGHT))
     pygame.draw.rect(screen, (255,255,255),
                      (PAUSE_BOX_X, PAUSE_BOX_Y, PAUSE_BOX_WIDTH, PAUSE_BOX_HEIGHT), width=2)
