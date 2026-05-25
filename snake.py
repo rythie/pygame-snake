@@ -1,3 +1,7 @@
+"""
+Simple snake game implementation in python
+"""
+
 import sys
 import random
 import pygame
